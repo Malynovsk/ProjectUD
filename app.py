@@ -105,14 +105,13 @@ async def createtrack():
 @application.route('/search', methods=['POST', 'GET'])
 async def search():
     if request.method == "GET":
-        return render_template('/search.html', data = 'Stop', first='0')
+        return render_template('/search.html', data = 'Stop')
     if request.method == 'POST':
         res = await db.track_check(track = str(request.form['track']))
         if res != False:
             resstatues = await db.getStatuses(track = str(request.form['track']))
-            first = await db.firststatus(track = str(request.form['track']))
             if resstatues != False:
-                return render_template('/search.html',oper=0, first=first, data = res, ss=resstatues, datetime=datetime)
+                return render_template('/search.html', data = res, ss=resstatues, datetime=datetime)
             else:
                 return render_template('/search.html', data = 'None')
         else:
@@ -129,8 +128,7 @@ async def orders():
 async def srch(track):
     res = await db.track_check(track =track)
     resstatues = await db.getStatuses(track = track)
-    first = await db.firststatus(track = track)
-    return render_template('./search.html', oper = 0, first = first, data = res, ss = resstatues, datetime=datetime)
+    return render_template('./search.html', data = res, ss = resstatues, datetime=datetime)
 
 @application.route('/editTrack/<string:track>', methods=['POST', 'GET'])
 async def editTrack(track):

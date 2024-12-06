@@ -109,17 +109,7 @@ async def track_check(track):
         await db.commit()
         await db.close()
         return data 
-
-async def firststatus(track):
-    db = await conn()
-    sql = await db.cursor()
-    await sql.execute("SELECT * FROM statuses WHERE track = ?", (track,))
-    res = await sql.fetchone()
-    if res != None:
-        await db.commit()
-        await db.close()
-        return res
-
+        
 async def getStatuses(track):
     db = await conn()
     sql = await db.cursor()
