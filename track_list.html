@@ -30,6 +30,9 @@
                 <div class="main__track-item">
                     Вес
                 </div>
+                <div class="main__track-item">Предполагаемая дата доставки
+                </div> 
+                <!-- НОВЕ ПОЛЕ -->
                 <div class="main__track-item main__track-item_small">
                     Изменить
                 </div>
@@ -43,26 +46,23 @@
             {% for i in orders %}
             <div class="main__track">
                 <div class="main__track-item">
-                    {{ i[1] }} </div>
+                    {{ i.sender }} </div>
                 <div class="main__track-item">
-                    {{ i[2] }} </div>
+                    {{ i.receiver }} </div>
                 <div class="main__track-item">
-                    {{ i[3] }} kg </div>
-                <a class="main__track-item main__track-item_small" href="{{ url_for('editTrack', track=i[0]) }}">
+                    {{ i.weight }} kg </div>
+                <a class="main__track-item main__track-item_small" href="{{ url_for('editTrack', track=i.id) }}">
                     РЕД.
                 </a>
-                <a class="main__track-item main__track-item_small" href="{{ url_for("deleteTrack", track=i[0]) }}">
+                <a class="main__track-item main__track-item_small" href="{{ url_for('deleteTrack', track=i.id) }}">
                     УДАЛ.
                 </a>
-                <a class="main__track-item main__track-item_small" href="{{ url_for('srch', track=i[0]) }}">
-                    {{ i[0] }}</a>
+                <a class="main__track-item main__track-item_small" href="{{ url_for('srch', track=i.id) }}">
+                    {{ i.id }}</a>
             </div>
             {% endfor %}
-
         </div>
     </div>
-
-
 </body>
 
 </html>
